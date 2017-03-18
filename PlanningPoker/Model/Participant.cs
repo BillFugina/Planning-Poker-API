@@ -13,7 +13,8 @@ namespace PlanningPoker.Model
 
         public Participant(string name, ParticipantRole role)
         {
-            
+            Name = name;
+            Role = role;
         }
     }
 
