@@ -8,22 +8,37 @@ namespace PlanningPoker.Model
     public class Session
     {
         private readonly List<Participant> _participants = new List<Participant>();
+        private readonly Stack<Round> _rounds = new Stack<Round>();
+
         public Guid Id { get; set; } = Guid.NewGuid();
         public string Name { get; set; }
         public Participant Master { get; set; }
 
+
         public IEnumerable<Participant> Participants => _participants.AsEnumerable();
+
+        public Round CurrentRound => _rounds.Peek();
 
         public Session(string name, string masterName)
         {
             Name = name;
-            var master = new Participant(masterName, ParticpantRole.Master);
+            var master = new Participant(masterName, ParticipantRole.Master);
             _participants.Add(master);
+            _rounds.Push(new Round()
+            {
+                Id = 0,
+                State = RoundState.Null
+            });
         }
 
         public void AddParticpant(Participant particpant)
         {
             _participants.Add(particpant);
+        }
+
+        public void AddRound(Round round)
+        {
+            _rounds.Push(round);
         }
     }
 
@@ -33,23 +48,43 @@ namespace PlanningPoker.Model
         public string Name { get; set; }
     }
 
+    public class SessionApplication
+    {
+        public string SessionName { get; set; }
+        public string MasterName { get; set; }
+    }
+
     public class Round
     {
+        private readonly IList<Vote> _votes = new List<Vote>();
         public int Id { get; set; }
         public RoundState State { get; set; }
-        public IEnumerable<Vote> Votes { get; } = new List<Vote>();
+
+        public IEnumerable<Vote> Votes => _votes;
+
+        public void AddVote(Vote vote)
+        {
+            _votes.Add(vote);
+        }
     }
 
     public enum RoundState
     {
-        Pending = 0,
-        Started = 1,
-        Closed = 2
+        Null = 0,
+        Pending = 1,
+        Started = 2,
+        Complete = 3
     }
 
     public class Vote
     {
         public Participant Participant { get; set; }
+        public int Value { get; set; }
+    }
+
+    public class VoteBallot
+    {
+        public string ParticipantName { get; set; }
         public int Value { get; set; }
     }
 }

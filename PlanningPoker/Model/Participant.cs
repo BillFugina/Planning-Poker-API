@@ -9,18 +9,24 @@ namespace PlanningPoker.Model
     {
         public Guid Id { get; set; } = Guid.NewGuid();
         public string Name { get; set; }
-        public ParticpantRole Role { get; set; }
+        public ParticipantRole Role { get; set; }
 
-        public Participant(string name, ParticpantRole role)
+        public Participant(string name, ParticipantRole role)
         {
             
         }
     }
 
-    public enum ParticpantRole
+    public enum ParticipantRole
     {
         Observer = 0,
         Voter = 1,
         Master = 2
+    }
+
+    public class ParticipantApplication
+    {
+        public string Name { get; set; }
+        public ParticipantRole Role { get; set; }
     }
 }

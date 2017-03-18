@@ -44,4 +44,49 @@ namespace PlanningPoker.System.Exceptions
             
         }
     }
+
+    public class RoundClashException : ServiceException
+    {
+        public RoundClashException() : base("Active round already started.")
+        {
+        }
+
+        public RoundClashException(string message) : base(message)
+        {
+        }
+
+        public RoundClashException(string message, Exception innerException) : base(message, innerException)
+        {
+        }
+    }
+
+    public class IncorrectRoundException : ServiceException
+    {
+        public IncorrectRoundException() : base("Could not find round.")
+        {
+        }
+
+        public IncorrectRoundException(string message) : base(message)
+        {
+        }
+
+        public IncorrectRoundException(string message, Exception innerException) : base(message, innerException)
+        {
+        }
+    }
+
+    public class VoteClashException : ServiceException
+    {
+        public VoteClashException() : base("Cannot change vote.")
+        {
+        }
+
+        public VoteClashException(string message) : base(message)
+        {
+        }
+
+        public VoteClashException(string message, Exception innerException) : base(message, innerException)
+        {
+        }
+    }
 }
