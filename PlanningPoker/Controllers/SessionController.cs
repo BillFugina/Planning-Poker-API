@@ -24,18 +24,13 @@ namespace PlanningPoker.Controllers
         /// Create a new session.
         /// </summary>
         /// <param name="application">The name of the session to create.</param>
-        /// <returns>The id of the created session.</returns>
+        /// <returns>The The created session.</returns>
         [HttpPost]
         [Route("sessions")]
-        public SessionId CreateSession([FromBody] SessionApplication application)
+        public Session CreateSession([FromBody] SessionApplication application)
         {
             var session = _sessionsService.CreateSession(application.SessionName, application.MasterName);
-            var result = new SessionId()
-            {
-                Id = session.Id,
-                Name = session.Name
-            };
-            return result;
+            return session;
         }
 
         /// <summary>

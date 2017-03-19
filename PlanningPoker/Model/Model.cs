@@ -5,6 +5,32 @@ using System.Threading.Tasks;
 
 namespace PlanningPoker.Model
 {
+    public class Participant
+    {
+        public Guid Id { get; set; } = Guid.NewGuid();
+        public string Name { get; set; }
+        public ParticipantRole Role { get; set; }
+
+        public Participant(string name, ParticipantRole role)
+        {
+            Name = name;
+            Role = role;
+        }
+    }
+
+    public enum ParticipantRole
+    {
+        Observer = 0,
+        Voter = 1,
+        Master = 2
+    }
+
+    public class ParticipantApplication
+    {
+        public string Name { get; set; }
+        public ParticipantRole Role { get; set; }
+    }
+
     public class Session
     {
         private readonly List<Participant> _participants = new List<Participant>();
@@ -23,6 +49,7 @@ namespace PlanningPoker.Model
         {
             Name = name;
             var master = new Participant(masterName, ParticipantRole.Master);
+            this.Master = master;
             _participants.Add(master);
             _rounds.Push(new Round()
             {

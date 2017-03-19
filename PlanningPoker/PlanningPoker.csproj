@@ -24,5 +24,43 @@
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.0-msbuild3-final" />
   </ItemGroup>
+  <ItemGroup>
+    <None Update="ApiHubController.ts">
+      <CustomToolNamespace>Controllers\ApiHubController.cs</CustomToolNamespace>
+    </None>
+    <None Update="Broadcaster.ts">
+      <CustomToolNamespace>Hubs\Broadcaster.cs</CustomToolNamespace>
+    </None>
+    <None Update="Cors.ts">
+      <CustomToolNamespace>Model\Configuration\Cors.cs</CustomToolNamespace>
+    </None>
+    <None Update="Model.ts">
+      <CustomToolNamespace>Model\Model.cs</CustomToolNamespace>
+    </None>
+    <None Update="Model\Cors.ts">
+      <CustomToolNamespace>Model\Configuration\Cors.cs</CustomToolNamespace>
+    </None>
+    <None Update="Model\Model.ts">
+      <CustomToolNamespace>Model\Model.cs</CustomToolNamespace>
+    </None>
+    <None Update="Program.ts">
+      <CustomToolNamespace>Program.cs</CustomToolNamespace>
+    </None>
+    <None Update="ServiceException.ts">
+      <CustomToolNamespace>System\Exceptions\ServiceException.cs</CustomToolNamespace>
+    </None>
+    <None Update="SessionController.ts">
+      <CustomToolNamespace>Controllers\SessionController.cs</CustomToolNamespace>
+    </None>
+    <None Update="SessionsService.ts">
+      <CustomToolNamespace>Services\SessionsService.cs</CustomToolNamespace>
+    </None>
+    <None Update="Startup.ts">
+      <CustomToolNamespace>Startup.cs</CustomToolNamespace>
+    </None>
+    <None Update="ValuesController.ts">
+      <CustomToolNamespace>Controllers\ValuesController.cs</CustomToolNamespace>
+    </None>
+  </ItemGroup>
 
 </Project>
