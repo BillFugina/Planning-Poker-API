@@ -44,7 +44,7 @@ namespace PlanningPoker.Services
             return result;
         }
 
-        public void JoinSession(string sessionName, string participantName)
+        public Session JoinSession(string sessionName, string participantName)
         {
             var session = GetSession(sessionName);
 
@@ -55,6 +55,7 @@ namespace PlanningPoker.Services
 
             var particpant = new Participant(participantName, ParticipantRole.Voter);
             session.AddParticpant(particpant);
+            return session;
         }
 
         public Round StartRound(Guid sessionId)

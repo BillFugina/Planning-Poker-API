@@ -9,7 +9,7 @@ namespace PlanningPoker.Services
         IEnumerable<Session> Sessions { get; }
         Session GetSession(string sessionName);
         Session CreateSession(string sessionName, string masterName);
-        void JoinSession(string sessionName, string participantName);
+        Session JoinSession(string sessionName, string participantName);
         Session GetSession(Guid sessionId);
         Round StartRound(Guid sessionId);
         void Vote(string sessionName, string participantName, int round, int vote, bool allowOverwrite = false);

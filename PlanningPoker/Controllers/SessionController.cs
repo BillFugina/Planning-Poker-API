@@ -40,9 +40,9 @@ namespace PlanningPoker.Controllers
         /// <param name="participant">Information about the person joining the session.</param>
         [HttpPost]
         [Route("sessions/{sessionName}/participants")]
-        public void JoinSession([FromRoute]string sessionName, [FromBody]ParticipantApplication participant)
+        public Session JoinSession([FromRoute]string sessionName, [FromBody]ParticipantApplication participant)
         {
-            _sessionsService.JoinSession(sessionName, participant.Name);
+            return _sessionsService.JoinSession(sessionName, participant.Name);
         }
 
         /// <summary>
