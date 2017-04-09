@@ -62,7 +62,7 @@ namespace PlanningPoker.Controllers
         /// </summary>
         /// <param name="sessionId">The id of the session where the round will be started</param>
         /// <returns>The id of the new round.</returns>
-        [HttpPost]
+        [HttpGet]
         [Route("sessions/{sessionId}/rounds")]
         public int StartRound([FromRoute] Guid sessionId)
         {
