@@ -25,6 +25,9 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.0-msbuild3-final" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="C:\dev\github\Planning-Poker-API\readme.md" Link="readme.md" />
+  </ItemGroup>
+  <ItemGroup>
     <None Update="ApiHubController.ts">
       <CustomToolNamespace>Controllers\ApiHubController.cs</CustomToolNamespace>
     </None>
