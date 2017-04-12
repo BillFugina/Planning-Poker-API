@@ -41,7 +41,7 @@ namespace PlanningPoker
 
             services.AddSingleton<ISessionsService, SessionsService>();
 
-            services.AddScoped<ISnsService, SnsService>();
+            services.AddSingleton<ISnsService, SnsService>();
 
             // Add framework services.
             services.AddCors();

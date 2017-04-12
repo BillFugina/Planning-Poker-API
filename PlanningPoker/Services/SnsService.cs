@@ -25,5 +25,21 @@ namespace PlanningPoker.Services
             return response;
         }
 
+
+        public async Task<DeleteTopicResponse> DeleteSession(string sessionName)
+        {
+            var deleteTopicRequest = new DeleteTopicRequest(sessionName);
+            var response = await _snsService.DeleteTopicAsync(deleteTopicRequest);
+            return response;
+        }
+
+        public async Task<PublishResponse> RegisterVote(string sessionArn, string message)
+        {
+            var response = await _snsService.PublishAsync(sessionArn, message);
+            return response;
+        }
+
+
+
     }
 }

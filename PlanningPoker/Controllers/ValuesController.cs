@@ -21,7 +21,8 @@ namespace PlanningPoker.Controllers
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            _snsService.CreateSession("Foo");
+            var createResult = _snsService.CreateSession("Foo");
+            _snsService.RegisterVote(createResult.Result.TopicArn, "Hello");
             return new string[] { "value1", "value2" };
         }
 
