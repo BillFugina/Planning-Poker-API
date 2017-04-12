@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Amazon.SimpleNotificationService;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -11,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.PlatformAbstractions;
 using Newtonsoft.Json.Serialization;
+using PlanningPoker.Interfaces.Services;
 using PlanningPoker.Services;
 using Swashbuckle.AspNetCore;
 using Swashbuckle;
@@ -39,11 +41,12 @@ namespace PlanningPoker
 
             services.AddSingleton<ISessionsService, SessionsService>();
 
+            services.AddScoped<ISnsService, SnsService>();
+
             // Add framework services.
             services.AddCors();
             services.AddMvc()
                 .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
-            services.AddSignalR(options => options.Hubs.EnableDetailedErrors = true);
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
@@ -53,6 +56,9 @@ namespace PlanningPoker
                 var xmlPath = Path.Combine(basePath, "PlanningPoker.xml");
                 c.IncludeXmlComments(xmlPath);
             });
+
+            services.AddDefaultAWSOptions(Configuration.GetAWSOptions());
+            services.AddAWSService<IAmazonSimpleNotificationService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -84,7 +90,6 @@ namespace PlanningPoker
             loggerFactory.AddDebug();
 
             app.UseMvc();
-            app.UseSignalR();
 
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
