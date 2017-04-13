@@ -19,6 +19,7 @@
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Server" Version="0.2.0-rtm-22752" />
     <PackageReference Include="Microsoft.AspNetCore.WebSockets" Version="1.0.1" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.1.1" />
+    <PackageReference Include="PusherServer" Version="4.0.0-rc1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="1.0.0-rc3" />
   </ItemGroup>
   <ItemGroup>
