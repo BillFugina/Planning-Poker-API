@@ -3,14 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using PlanningPoker.Model;
 using PlanningPoker.System.Exceptions;
+using PlanningPoker.Interfaces.Services;
 
 namespace PlanningPoker.Services
 {
     public class SessionsService : ISessionsService
     {
         private readonly List<Session> _sessions = new List<Session>();
+        private readonly INotificationService _notificationService;
 
         public IEnumerable<Session> Sessions => _sessions.AsEnumerable();
+
+        public SessionsService(
+            INotificationService notificationService
+            )
+        {
+            _notificationService = notificationService;
+        }
 
         public Session GetSession(string sessionName)
         {
@@ -41,6 +50,7 @@ namespace PlanningPoker.Services
 
             var result = new Session(sessionName, masterName);
             _sessions.Add(result);
+            _notificationService.StartSession(sessionName);
             return result;
         }
 
@@ -53,8 +63,9 @@ namespace PlanningPoker.Services
              throw new ParticipantClashException();   
             }
 
-            var particpant = new Participant(participantName, ParticipantRole.Voter);
-            session.AddParticpant(particpant);
+            var participant = new Participant(participantName, ParticipantRole.Voter);
+            session.AddParticpant(participant);
+            _notificationService.RegisterParticipant(sessionName, participant);
             return session;
         }
 
@@ -103,6 +114,7 @@ namespace PlanningPoker.Services
             };
 
             currentRound.AddVote(newVote);
+            _notificationService.RegisterVote(session.Name, newVote);
         }
 
         public void EndRound(Guid sessionId, int roundId)

@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
+using PlanningPoker.Interfaces.Services;
+using PlanningPoker.Model;
 using PusherServer;
 using System;
 using System.Collections.Generic;
@@ -7,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PlanningPoker.Services
 {
-    public class NotificationService
+    public class NotificationService : INotificationService
     {
         private readonly Pusher _pusher;
         private readonly Model.Configuration.Pusher _pusherOptions;
@@ -20,10 +22,19 @@ namespace PlanningPoker.Services
             _pusher = new Pusher(_pusherOptions.AppID, _pusherOptions.Key, _pusherOptions.Secret);
         }
 
-        public async void RegisterVote(string sessionName)
+        public async void StartSession(string sessionName)
         {
-            var result = await _pusher.TriggerAsync(sessionName, "RegisterVote", "");
+            var result = await _pusher.TriggerAsync(sessionName, "BeginSession", "");
         }
 
+        public async void RegisterVote(string sessionName, Vote vote)
+        {
+            var result = await _pusher.TriggerAsync(sessionName, "RegisterVote", vote);
+        }
+
+        public async void RegisterParticipant(string sessionName, Participant participant)
+        {
+            var result = await _pusher.TriggerAsync(sessionName, "RegisterParticipant", participant);
+        }
     }
 }

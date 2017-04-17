@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using PlanningPoker.Model;
 
-namespace PlanningPoker.Services
+namespace PlanningPoker.Interfaces.Services
 {
     public interface ISessionsService
     {

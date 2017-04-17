@@ -15,6 +15,7 @@ using PlanningPoker.Services;
 using Swashbuckle.AspNetCore;
 using Swashbuckle;
 using Swashbuckle.AspNetCore.Swagger;
+using PlanningPoker.Interfaces.Services;
 
 namespace PlanningPoker
 {
@@ -39,6 +40,7 @@ namespace PlanningPoker
             services.Configure<Model.Configuration.Pusher>(Configuration.GetSection("Pusher"));
 
             services.AddSingleton<ISessionsService, SessionsService>();
+            services.AddSingleton<INotificationService, NotificationService>();
 
             // Add framework services.
             services.AddCors();
