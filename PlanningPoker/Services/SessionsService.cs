@@ -80,9 +80,11 @@ namespace PlanningPoker.Services
             var round = new Round()
             {
                 Id = session.CurrentRound.Id + 1,
-                State = RoundState.Pending
+                State = RoundState.Started,
+                End = DateTime.Now.ToUniversalTime().AddSeconds(10)
             };
             session.AddRound(round);
+            _notificationService.StartRound(session.Name, round);
             return round;
         }
 
@@ -93,7 +95,12 @@ namespace PlanningPoker.Services
 
             if (currentRound.Id != round)
             {
-                throw new IncorrectRoundException();
+                throw new IncorrectRoundException("Round does not exist.");
+            }
+
+            if (session.CurrentRound.State != RoundState.Started)
+            {
+                throw new IncorrectRoundException("Round has not started.");
             }
 
             var participant = session.Participants.SingleOrDefault(v => v.Name == participantName);

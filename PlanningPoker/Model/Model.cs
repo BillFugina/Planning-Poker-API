@@ -89,6 +89,8 @@ namespace PlanningPoker.Model
 
         public IEnumerable<Vote> Votes => _votes;
 
+        public DateTime End { get; set; }
+
         public void AddVote(Vote vote)
         {
             _votes.Add(vote);
