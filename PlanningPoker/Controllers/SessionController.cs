@@ -65,10 +65,10 @@ namespace PlanningPoker.Controllers
         /// <returns>The id of the new round.</returns>
         [HttpGet]
         [Route("sessions/{sessionId}/rounds")]
-        public int StartRound([FromRoute] Guid sessionId)
+        public Round StartRound([FromRoute] Guid sessionId)
         {
             var round = _sessionsService.StartRound(sessionId);
-            return round.Id;
+            return round;
         }
 
         /// <summary>
