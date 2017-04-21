@@ -7,6 +7,6 @@ namespace PlanningPoker.Interfaces.Services
         void RegisterVote(string sessionName, Vote vote);
         void RegisterParticipant(string sessionName, Participant participant);
         void StartSession(string sessionName);
-        void StartRound(string sessionName, Round round);
+        void PrepareRound(string sessionName, Round round);
     }
 }

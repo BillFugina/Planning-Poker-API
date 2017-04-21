@@ -37,9 +37,9 @@ namespace PlanningPoker.Services
             var result = await _pusher.TriggerAsync(sessionName, "RegisterParticipant", participant);
         }
 
-        public async void StartRound(string sessionName, Round round)
+        public async void PrepareRound(string sessionName, Round round)
         {
-            var result = await _pusher.TriggerAsync(sessionName, "StartRound", round);
+            var result = await _pusher.TriggerAsync(sessionName, "PrepareRound", round);
         }
     }
 }

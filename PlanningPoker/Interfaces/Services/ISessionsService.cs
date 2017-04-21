@@ -11,7 +11,7 @@ namespace PlanningPoker.Interfaces.Services
         Session CreateSession(string sessionName, string masterName);
         Session JoinSession(string sessionName, string participantName);
         Session GetSession(Guid sessionId);
-        Round StartRound(Guid sessionId);
+        Round PrepareRound(Guid sessionId);
         void Vote(string sessionName, string participantName, int round, int vote, bool allowOverwrite = false);
         void EndRound(Guid sessionId, int roundId);
         void EndSession(Guid sessionId);

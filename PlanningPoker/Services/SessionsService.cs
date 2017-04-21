@@ -75,17 +75,17 @@ namespace PlanningPoker.Services
             return session;
         }
 
-        public Round StartRound(Guid sessionId)
+        public Round PrepareRound(Guid sessionId)
         {
             var session = GetSession(sessionId);
             var round = new Round()
             {
                 Id = session.CurrentRound.Id + 1,
-                State = RoundState.Started,
-                End = DateTime.Now.ToUniversalTime().AddSeconds(10)
+                State = RoundState.Pending,
+                End = DateTime.Now
             };
             session.AddRound(round);
-            _notificationService.StartRound(session.Name, round);
+            _notificationService.PrepareRound(session.Name, round);
             return round;
         }
 
@@ -99,7 +99,7 @@ namespace PlanningPoker.Services
                 throw new IncorrectRoundException("Round does not exist.");
             }
 
-            if (session.CurrentRound.State != RoundState.Started)
+            if (session.CurrentRound.State != RoundState.Pending && session.CurrentRound.State != RoundState.Started)
             {
                 throw new IncorrectRoundException("Round has not started.");
             }

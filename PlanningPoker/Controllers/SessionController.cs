@@ -59,15 +59,15 @@ namespace PlanningPoker.Controllers
         }
 
         /// <summary>
-        /// Start a new round.
+        /// Prepare a new round.
         /// </summary>
         /// <param name="sessionId">The id of the session where the round will be started</param>
         /// <returns>The id of the new round.</returns>
         [HttpGet]
         [Route("sessions/{sessionId}/rounds")]
-        public Round StartRound([FromRoute] Guid sessionId)
+        public Round PrepareRound([FromRoute] Guid sessionId)
         {
-            var round = _sessionsService.StartRound(sessionId);
+            var round = _sessionsService.PrepareRound(sessionId);
             return round;
         }
 
