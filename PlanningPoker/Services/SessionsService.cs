@@ -43,13 +43,19 @@ namespace PlanningPoker.Services
 
         public Session  CreateSession(string sessionName, string masterName)
         {
+            
             if (_sessions.Any(s => s.Name == sessionName && s.Master.Name != masterName))
             {
                 throw new SessionClashException();
             }
 
-            var result = new Session(sessionName, masterName);
-            _sessions.Add(result);
+            var result = _sessions.SingleOrDefault(s => s.Name == sessionName && s.Master.Name == masterName);
+
+            if (result == null)
+            {
+                result = new Session(sessionName, masterName);
+                _sessions.Add(result);
+            }
             _notificationService.StartSession(sessionName);
             return result;
         }
@@ -72,16 +78,11 @@ namespace PlanningPoker.Services
         public Round StartRound(Guid sessionId)
         {
             var session = GetSession(sessionId);
-            //if (session.CurrentRound.State != RoundState.Null && session.CurrentRound.State != RoundState.Complete)
-            //{
-            //    throw new RoundClashException();
-            //}
-
             var round = new Round()
             {
                 Id = session.CurrentRound.Id + 1,
                 State = RoundState.Started,
-                End = DateTime.Now.ToUniversalTime().AddSeconds(60)
+                End = DateTime.Now.ToUniversalTime().AddSeconds(10)
             };
             session.AddRound(round);
             _notificationService.StartRound(session.Name, round);
@@ -130,11 +131,6 @@ namespace PlanningPoker.Services
             var currentRound = session.CurrentRound;
 
             if (currentRound.Id != roundId)
-            {
-                throw new IncorrectRoundException();
-            }
-
-            if (currentRound.State != RoundState.Complete)
             {
                 throw new IncorrectRoundException();
             }
