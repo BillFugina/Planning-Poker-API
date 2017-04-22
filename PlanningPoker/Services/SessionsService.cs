@@ -89,6 +89,28 @@ namespace PlanningPoker.Services
             return round;
         }
 
+        public Round StartCountdown(Guid sessionId, int roundId)
+        {
+            var session = GetSession(sessionId);
+            var currentRound = session.CurrentRound;
+
+            if (currentRound.Id != roundId)
+            {
+                throw new IncorrectRoundException("Round does not exist.");
+            }
+
+            if (session.CurrentRound.State != RoundState.Pending)
+            {
+                throw new IncorrectRoundException("Round is not ready.");
+            }
+
+            currentRound.State = RoundState.Started;
+            currentRound.End = DateTime.Now.AddSeconds(10).ToUniversalTime();
+
+            _notificationService.StartCountdown(session.Name, currentRound);
+            return currentRound;
+        }
+
         public void Vote(string sessionName, string participantName, int round, int vote, bool allowOverwrite = false)
         {
             var session = GetSession(sessionName);

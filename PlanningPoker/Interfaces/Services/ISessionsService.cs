@@ -6,6 +6,8 @@ namespace PlanningPoker.Interfaces.Services
 {
     public interface ISessionsService
     {
+        Round StartCountdown(Guid sessionId, int roundId);
+
         IEnumerable<Session> Sessions { get; }
         Session GetSession(string sessionName);
         Session CreateSession(string sessionName, string masterName);

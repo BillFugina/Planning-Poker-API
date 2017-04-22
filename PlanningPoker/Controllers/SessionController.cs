@@ -71,6 +71,14 @@ namespace PlanningPoker.Controllers
             return round;
         }
 
+        [HttpGet]
+        [Route("sessions/{sessionId}/rounds/{roundId}")]
+        public Round BeginCountdown([FromRoute] Guid sessionId, [FromRoute] int roundId)
+        {
+            var round = _sessionsService.StartCountdown(sessionId, roundId);
+            return round;
+        }
+
         /// <summary>
         /// Submit a vote for the current round
         /// </summary>

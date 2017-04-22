@@ -41,5 +41,11 @@ namespace PlanningPoker.Services
         {
             var result = await _pusher.TriggerAsync(sessionName, "PrepareRound", round);
         }
+
+        public async void StartCountdown(string sessionName, Round round)
+        {
+            var result = await _pusher.TriggerAsync(sessionName, "StartCountdown", round);
+        }
+
     }
 }
