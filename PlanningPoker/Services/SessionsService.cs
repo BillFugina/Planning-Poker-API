@@ -111,7 +111,7 @@ namespace PlanningPoker.Services
             return currentRound;
         }
 
-        public void Vote(string sessionName, string participantName, int round, int vote, bool allowOverwrite = false)
+        public void Vote(string sessionName, string participantName, int round, int vote, bool allowOverwrite = true)
         {
             var session = GetSession(sessionName);
             var currentRound = session.CurrentRound;

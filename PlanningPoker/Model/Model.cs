@@ -93,6 +93,11 @@ namespace PlanningPoker.Model
 
         public void AddVote(Vote vote)
         {
+            var existingVote = _votes.SingleOrDefault(v => v.Participant.Id == vote.Participant.Id);
+            if (existingVote != null)
+            {
+                _votes.Remove(existingVote);
+            }
             _votes.Add(vote);
         }
     }

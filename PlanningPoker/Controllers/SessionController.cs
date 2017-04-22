@@ -89,7 +89,7 @@ namespace PlanningPoker.Controllers
         [Route("sessions/{sessionName}/rounds/{roundId}/votes")]
         public void Vote([FromRoute]string sessionName, [FromRoute] int roundId, [FromBody] VoteBallot ballot)
         {
-            _sessionsService.Vote(sessionName, ballot.ParticipantName,  roundId, ballot.Value);
+            _sessionsService.Vote(sessionName, ballot.ParticipantName,  roundId, ballot.Value, true);
         }
 
         /// <summary>
