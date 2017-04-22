@@ -35,6 +35,13 @@ namespace PlanningPoker.Model
     {
         private readonly List<Participant> _participants = new List<Participant>();
         private readonly Stack<Round> _rounds = new Stack<Round>();
+        private readonly List<Card> _cards = new List<Card> {
+            new Card{ Display= "1", Value= 1 },
+            new Card{ Display= "2", Value= 2 },
+            new Card{ Display= "3", Value= 3 },
+            new Card{ Display= "5", Value= 5 },
+            new Card{ Display= "8", Value= 8 },
+        };
 
         public Guid Id { get; set; } = Guid.NewGuid();
         public string Name { get; set; }
@@ -44,6 +51,7 @@ namespace PlanningPoker.Model
         public IEnumerable<Participant> Participants => _participants.AsEnumerable();
 
         public Round CurrentRound => _rounds.Peek();
+        public IEnumerable<Card> cards => _cards;
 
         public Session(string name, string masterName)
         {
@@ -119,6 +127,12 @@ namespace PlanningPoker.Model
     public class VoteBallot
     {
         public string ParticipantName { get; set; }
+        public int Value { get; set; }
+    }
+
+    public class Card
+    {
+        public String Display { get; set; }
         public int Value { get; set; }
     }
 }

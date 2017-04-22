@@ -9,5 +9,6 @@ namespace PlanningPoker.Interfaces.Services
         void RegisterParticipant(string sessionName, Participant participant);
         void StartSession(string sessionName);
         void PrepareRound(string sessionName, Round round);
+        void EndRound(string name, int roundId);
     }
 }

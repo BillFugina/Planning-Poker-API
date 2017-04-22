@@ -158,6 +158,7 @@ namespace PlanningPoker.Services
             }
 
             currentRound.State = RoundState.Complete;
+            _notificationService.EndRound(session.Name, roundId);
         }
 
         public void EndSession(Guid sessionId)

@@ -47,5 +47,9 @@ namespace PlanningPoker.Services
             var result = await _pusher.TriggerAsync(sessionName, "StartCountdown", round);
         }
 
+        public async void EndRound(string sessionName, int roundId)
+        {
+            var result = await _pusher.TriggerAsync(sessionName, "EndRound", roundId);
+        }
     }
 }
