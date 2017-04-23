@@ -32,7 +32,7 @@ export interface ISession {
     Master: IParticipant
     Participants: IParticipant[]
     CurrentRound: IRound
-    cards: ICard[]
+    Cards: ICard[]
 }
 
 export interface ISessionId { 

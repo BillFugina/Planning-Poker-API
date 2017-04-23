@@ -51,7 +51,7 @@ namespace PlanningPoker.Model
         public IEnumerable<Participant> Participants => _participants.AsEnumerable();
 
         public Round CurrentRound => _rounds.Peek();
-        public IEnumerable<Card> cards => _cards;
+        public IEnumerable<Card> Cards => _cards;
 
         public Session(string name, string masterName)
         {
