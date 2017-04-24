@@ -53,8 +53,9 @@ namespace PlanningPoker.Model
 
         public IEnumerable<Participant> Participants => _participants.AsEnumerable();
 
-        public Round CurrentRound => _rounds.Peek();
+        public Round CurrentRound => _rounds.Any() ? _rounds.Peek() : null;
         public IEnumerable<Card> Cards => _cards;
+        public IEnumerable<Round> Rounds => _rounds;
 
         public Session(string name, string masterName)
         {
@@ -62,11 +63,11 @@ namespace PlanningPoker.Model
             var master = new Participant(masterName, ParticipantRole.Master);
             this.Master = master;
             _participants.Add(master);
-            _rounds.Push(new Round()
-            {
-                Id = 0,
-                State = RoundState.Null
-            });
+            //_rounds.Push(new Round()
+            //{
+            //    Id = 0,
+            //    State = RoundState.Null
+            //});
         }
 
         public void AddParticpant(Participant particpant)

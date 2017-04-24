@@ -80,7 +80,7 @@ namespace PlanningPoker.Services
             var session = GetSession(sessionId);
             var round = new Round()
             {
-                Id = session.CurrentRound.Id + 1,
+                Id = (session.CurrentRound?.Id ?? 0) + 1,
                 State = RoundState.Pending,
                 End = DateTime.Now
             };
