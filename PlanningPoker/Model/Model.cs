@@ -41,6 +41,9 @@ namespace PlanningPoker.Model
             new Card{ Display= "3", Value= 3 },
             new Card{ Display= "5", Value= 5 },
             new Card{ Display= "8", Value= 8 },
+            new Card{ Display= "13", Value= 13 },
+            new Card{ Display= "☕", Value= 20 },
+            new Card{ Display= "😨", Value= 30 },
         };
 
         public Guid Id { get; set; } = Guid.NewGuid();
