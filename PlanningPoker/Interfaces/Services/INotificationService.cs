@@ -10,5 +10,6 @@ namespace PlanningPoker.Interfaces.Services
         void StartSession(string sessionName);
         void PrepareRound(string sessionName, Round round);
         void EndRound(string name, int roundId);
+        void EndSession(string sessionName);
     }
 }

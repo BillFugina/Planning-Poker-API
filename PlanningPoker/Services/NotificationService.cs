@@ -51,5 +51,10 @@ namespace PlanningPoker.Services
         {
             var result = await _pusher.TriggerAsync(sessionName, "EndRound", roundId);
         }
+
+        public async void EndSession(string sessionName)
+        {
+            var result = await _pusher.TriggerAsync(sessionName, "EndSession", sessionName);
+        }
     }
 }

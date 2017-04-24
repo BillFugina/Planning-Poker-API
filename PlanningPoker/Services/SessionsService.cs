@@ -165,6 +165,7 @@ namespace PlanningPoker.Services
         {
             var session = GetSession(sessionId);
             _sessions.Remove(session);
+            _notificationService.EndSession(session.Name);
         }
     }
 }
