@@ -15,6 +15,7 @@ using Swashbuckle.AspNetCore;
 using Swashbuckle;
 using Swashbuckle.AspNetCore.Swagger;
 using PlanningPoker.Interfaces.Services;
+using Microsoft.AspNetCore.Rewrite;
 
 namespace PlanningPoker
 {
@@ -62,6 +63,11 @@ namespace PlanningPoker
             IOptions<Model.Configuration.Cors> corsOptionsAccessor
             )
         {
+            var rewriteOptions = new RewriteOptions()
+                .AddRewrite(@"^\/?$", "/swagger", true);
+
+            app.UseRewriter(rewriteOptions);
+
             var corsOptions = corsOptionsAccessor.Value;
             app.UseCors(builder =>
             {
