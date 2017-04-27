@@ -49,8 +49,8 @@ namespace PlanningPoker
                 c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
 
                 //Set the comments path for the swagger json and ui.
-                var xmlPath = Path.Combine(AppContext.BaseDirectory, "PlanningPoker.xml");
-                c.IncludeXmlComments(xmlPath);
+                //var xmlPath = Path.Combine(AppContext.BaseDirectory, "PlanningPoker.xml");
+                //c.IncludeXmlComments(xmlPath);
             });
         }
 
