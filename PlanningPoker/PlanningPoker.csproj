@@ -29,6 +29,11 @@
     <None Include="C:\dev\github\Planning-Poker-API\readme.md" Link="readme.md" />
   </ItemGroup>
   <ItemGroup>
+    <Content Update="wwwroot/PlanningPoker.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
     <None Update="ApiHubController.ts">
       <CustomToolNamespace>Controllers\ApiHubController.cs</CustomToolNamespace>
     </None>
