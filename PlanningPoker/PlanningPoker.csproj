@@ -20,6 +20,7 @@
     <PackageReference Include="Microsoft.AspNetCore.WebSockets" Version="1.0.1" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.1.1" />
     <PackageReference Include="PusherServer" Version="4.0.0-rc1" />
+    <PackageReference Include="QRCoder" Version="1.2.8" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="1.0.0-rc3" />
   </ItemGroup>
   <ItemGroup>
@@ -40,6 +41,9 @@
     </None>
     <None Update="Model.ts">
       <CustomToolNamespace>Model\Model.cs</CustomToolNamespace>
+    </None>
+    <None Update="Model\Client.ts">
+      <CustomToolNamespace>Model\Configuration\Client.cs</CustomToolNamespace>
     </None>
     <None Update="Model\Cors.ts">
       <CustomToolNamespace>Model\Configuration\Cors.cs</CustomToolNamespace>

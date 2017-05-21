@@ -38,6 +38,7 @@ namespace PlanningPoker
         {
             services.Configure<Model.Configuration.Cors>(Configuration.GetSection("Cors"));
             services.Configure<Model.Configuration.Pusher>(Configuration.GetSection("Pusher"));
+            services.Configure<Model.Configuration.Client>(Configuration.GetSection("Client"));
 
             services.AddSingleton<ISessionsService, SessionsService>();
             services.AddSingleton<INotificationService, NotificationService>();

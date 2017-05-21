@@ -4,8 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using PlanningPoker.Model;
+using PlanningPoker.Model.Configuration;
 using PlanningPoker.Services;
 using PlanningPoker.Interfaces.Services;
+using QRCoder;
+using Microsoft.Extensions.Options;
 
 namespace PlanningPoker.Controllers
 {
@@ -13,12 +16,16 @@ namespace PlanningPoker.Controllers
     public class SessionController : Controller
     {
         private readonly ISessionsService _sessionsService;
+        private readonly Client _clientConfiguration;
 
         public SessionController(
-            ISessionsService sessionsService
+            ISessionsService sessionsService,
+            IOptions<Model.Configuration.Client> clientOptions
+
             )
         {
             _sessionsService = sessionsService;
+            _clientConfiguration = clientOptions.Value;
         }
 
         /// <summary>
@@ -89,7 +96,7 @@ namespace PlanningPoker.Controllers
         [Route("sessions/{sessionName}/rounds/{roundId}/votes")]
         public void Vote([FromRoute]string sessionName, [FromRoute] int roundId, [FromBody] VoteBallot ballot)
         {
-            _sessionsService.Vote(sessionName, ballot.ParticipantName,  roundId, ballot.Value, true);
+            _sessionsService.Vote(sessionName, ballot.ParticipantName, roundId, ballot.Value, true);
         }
 
         /// <summary>
@@ -113,6 +120,17 @@ namespace PlanningPoker.Controllers
         public void EndSession([FromRoute] Guid sessionId)
         {
             _sessionsService.EndSession(sessionId);
+        }
+
+        [HttpGet]
+        [Route("sessions/{sessionId}/qrCode")]
+        public IActionResult GetQrCode([FromRoute] Guid sessionId)
+        {
+            var gen = new QRCodeGenerator();
+            var data = gen.CreateQrCode($"{_clientConfiguration.Url}/", QRCodeGenerator.ECCLevel.Q);
+            var qrcode = new BitmapByteQRCode(data);
+            var byteArray = qrcode.GetGraphic(20);
+            return File(byteArray, "image/bmp");
         }
 
     }
