@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,8 +6,6 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json.Serialization;
 using PlanningPoker.Services;
-using Swashbuckle.AspNetCore;
-using Swashbuckle;
 using Swashbuckle.AspNetCore.Swagger;
 using PlanningPoker.Interfaces.Services;
 using Microsoft.AspNetCore.Rewrite;
@@ -37,6 +30,7 @@ namespace PlanningPoker
         {
             services.Configure<Model.Configuration.Cors>(Configuration.GetSection("Cors"));
             services.Configure<Model.Configuration.Pusher>(Configuration.GetSection("Pusher"));
+            services.Configure<Model.Configuration.Client>(Configuration.GetSection("Client"));
 
             services.AddSingleton<ISessionsService, SessionsService>();
             services.AddSingleton<INotificationService, NotificationService>();

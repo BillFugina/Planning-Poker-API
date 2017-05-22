@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PlanningPoker.System.Exceptions
+namespace PlanningPoker.Sys.Exceptions
 {
     public class ServiceException : Exception
     {

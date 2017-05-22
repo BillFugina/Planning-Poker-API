@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using PlanningPoker.Model;
-using PlanningPoker.System.Exceptions;
+using PlanningPoker.Sys.Exceptions;
 using PlanningPoker.Interfaces.Services;
 
 namespace PlanningPoker.Services
