@@ -57,10 +57,10 @@ namespace PlanningPoker
             IOptions<Model.Configuration.Cors> corsOptionsAccessor
             )
         {
-            //var rewriteOptions = new RewriteOptions()
-            //    .AddRewrite(@"^\/?$", "/swagger", true);
+            var rewriteOptions = new RewriteOptions()
+                .AddRewrite(@"^\/?$", "/swagger", true);
 
-            //app.UseRewriter(rewriteOptions);
+            app.UseRewriter(rewriteOptions);
 
             var corsOptions = corsOptionsAccessor.Value;
             app.UseCors(builder =>
