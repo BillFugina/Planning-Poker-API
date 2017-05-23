@@ -119,11 +119,11 @@ namespace PlanningPoker.Controllers
         }
 
         [HttpGet]
-        [Route("sessions/{sessionId}/qrCode")]
-        public IActionResult GetQrCode([FromRoute] Guid sessionId)
+        [Route("sessions/{sessionName}/qrCode")]
+        public IActionResult GetQrCode([FromRoute] string sessionName)
         {
             var gen = new QRCodeGenerator();
-            var data = gen.CreateQrCode($"{_clientConfiguration.Url}/", QRCodeGenerator.ECCLevel.Q);
+            var data = gen.CreateQrCode($"{_clientConfiguration.Url}/join/{sessionName}", QRCodeGenerator.ECCLevel.Q);
             var qrcode = new BitmapByteQRCode(data);
             var byteArray = qrcode.GetGraphic(20);
             return File(byteArray, "image/bmp");
