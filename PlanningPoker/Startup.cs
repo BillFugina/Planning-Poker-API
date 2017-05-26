@@ -10,10 +10,13 @@ using Swashbuckle.AspNetCore.Swagger;
 using PlanningPoker.Interfaces.Services;
 using Microsoft.AspNetCore.Rewrite;
 
+
 namespace PlanningPoker
 {
     public class Startup
     {
+        public IConfigurationRoot Configuration { get; }
+
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -23,9 +26,9 @@ namespace PlanningPoker
                     .AddEnvironmentVariables();
             Configuration = builder.Build();
         }
-        public IConfigurationRoot Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
+        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<Model.Configuration.Cors>(Configuration.GetSection("Cors"));
@@ -51,12 +54,19 @@ namespace PlanningPoker
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(
-            IApplicationBuilder app,
-            IHostingEnvironment env,
+            IApplicationBuilder app, 
+            IHostingEnvironment env, 
             ILoggerFactory loggerFactory,
             IOptions<Model.Configuration.Cors> corsOptionsAccessor
             )
         {
+            loggerFactory.AddConsole();
+
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+
             var rewriteOptions = new RewriteOptions()
                 .AddRewrite(@"^\/?$", "/swagger", true);
 
