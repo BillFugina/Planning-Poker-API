@@ -70,7 +70,7 @@ namespace PlanningPoker.Model
             //});
         }
 
-        public void AddParticpant(Participant particpant)
+        public void AddParticipant(Participant particpant)
         {
             _participants.Add(particpant);
         }

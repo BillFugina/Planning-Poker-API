@@ -37,6 +37,7 @@ namespace PlanningPoker
 
             services.AddSingleton<ISessionsService, SessionsService>();
             services.AddSingleton<INotificationService, NotificationService>();
+            services.AddSingleton<ISanitizerService, SanitizerService>();
 
             // Add framework services.
             services.AddCors();

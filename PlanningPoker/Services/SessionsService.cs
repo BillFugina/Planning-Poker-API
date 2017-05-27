@@ -70,7 +70,7 @@ namespace PlanningPoker.Services
             }
 
             var participant = new Participant(participantName, ParticipantRole.Voter);
-            session.AddParticpant(participant);
+            session.AddParticipant(participant);
             _notificationService.RegisterParticipant(sessionName, participant);
             return session;
         }
