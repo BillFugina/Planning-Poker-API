@@ -13,15 +13,18 @@ namespace PlanningPoker.Controllers
     {
         private readonly ISessionsService _sessionsService;
         private readonly Client _clientConfiguration;
+        private readonly ISanitizerService _sanitizerService;
 
         public SessionController(
             ISessionsService sessionsService,
-            IOptions<Model.Configuration.Client> clientOptions
+            IOptions<Model.Configuration.Client> clientOptions,
+            ISanitizerService sanitizerService
 
         )
         {
             _sessionsService = sessionsService;
             _clientConfiguration = clientOptions.Value;
+            _sanitizerService = sanitizerService;
         }
 
         /// <summary>
@@ -123,7 +126,7 @@ namespace PlanningPoker.Controllers
         public IActionResult GetQrCode([FromRoute] string sessionName)
         {
             var gen = new QRCodeGenerator();
-            var data = gen.CreateQrCode($"{_clientConfiguration.Url}/#/join/{sessionName}", QRCodeGenerator.ECCLevel.Q);
+            var data = gen.CreateQrCode($"{_clientConfiguration.Url}/#/join/{_sanitizerService.LettersAndDigits(sessionName)}", QRCodeGenerator.ECCLevel.Q);
             var qrcode = new BitmapByteQRCode(data);
             var byteArray = qrcode.GetGraphic(20);
             return File(byteArray, "image/bmp");

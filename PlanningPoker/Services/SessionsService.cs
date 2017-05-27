@@ -11,19 +11,22 @@ namespace PlanningPoker.Services
     {
         private readonly List<Session> _sessions = new List<Session>();
         private readonly INotificationService _notificationService;
+        private readonly ISanitizerService _sanitizerService;
 
         public IEnumerable<Session> Sessions => _sessions.AsEnumerable();
 
         public SessionsService(
-            INotificationService notificationService
+            INotificationService notificationService,
+            ISanitizerService sanitizerService
             )
         {
             _notificationService = notificationService;
+            _sanitizerService = sanitizerService;
         }
 
         public Session GetSession(string sessionName)
         {
-            var session = _sessions.SingleOrDefault(s => s.Name == sessionName);
+            var session = _sessions.FirstOrDefault(s => s.Name == sessionName || _sanitizerService.LettersAndDigits(s.Name) == sessionName );
             if (session == null)
             {
                 throw new SessionMissingException();
@@ -44,7 +47,7 @@ namespace PlanningPoker.Services
         public Session  CreateSession(string sessionName, string masterName)
         {
             
-            if (_sessions.Any(s => s.Name == sessionName && s.Master.Name != masterName))
+            if (_sessions.Any(s => (s.Name == sessionName || _sanitizerService.LettersAndDigits(s.Name) == sessionName) && s.Master.Name != masterName))
             {
                 throw new SessionClashException();
             }
