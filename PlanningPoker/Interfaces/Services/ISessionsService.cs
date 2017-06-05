@@ -17,5 +17,6 @@ namespace PlanningPoker.Interfaces.Services
         void Vote(string sessionName, string participantName, int round, int vote, bool allowOverwrite = false);
         void EndRound(Guid sessionId, int roundId);
         void EndSession(Guid sessionId);
+        void RemoveParticipant(Guid sessionId, Guid participantId);
     }
 }

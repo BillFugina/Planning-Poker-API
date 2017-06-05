@@ -79,6 +79,15 @@ namespace PlanningPoker.Model
         {
             _rounds.Push(round);
         }
+
+        public void RemoveParticipant(Guid participantId)
+        {
+            var participant = _participants.Where(p => p.Id == participantId).SingleOrDefault();
+            if (participant != null)
+            {
+                _participants.Remove(participant);
+            }
+        }
     }
 
     public class SessionId

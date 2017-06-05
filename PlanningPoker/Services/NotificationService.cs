@@ -59,5 +59,10 @@ namespace PlanningPoker.Services
         {
             var result = await _pusher.TriggerAsync(_sanitizerService.LettersAndDigits(sessionName), "EndSession", sessionName);
         }
+
+        public async void RemoveParticipant(string sessionName, Guid participantId)
+        {
+            var result = await _pusher.TriggerAsync(_sanitizerService.LettersAndDigits(sessionName), "RemoveParticipant", participantId);
+        }
     }
 }

@@ -170,5 +170,12 @@ namespace PlanningPoker.Services
             _sessions.Remove(session);
             _notificationService.EndSession(session.Name);
         }
+
+        public void RemoveParticipant(Guid sessionId, Guid participantId)
+        {
+            var session = GetSession(sessionId);
+            session.RemoveParticipant(participantId);
+            _notificationService.RemoveParticipant(session.Name, participantId);
+        }
     }
 }

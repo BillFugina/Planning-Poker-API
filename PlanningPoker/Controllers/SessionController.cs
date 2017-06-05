@@ -132,5 +132,12 @@ namespace PlanningPoker.Controllers
             return File(byteArray, "image/bmp");
         }
 
+        [HttpDelete]
+        [Route("sessions/{sessionId}/participants/{participantId}")]
+        public void RemoveParticipant([FromRoute] Guid sessionId, [FromRoute] Guid participantId)
+        {
+            _sessionsService.RemoveParticipant(sessionId, participantId);
+        }
+
     }
 }
